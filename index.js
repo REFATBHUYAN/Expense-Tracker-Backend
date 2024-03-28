@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 var cors = require("cors");
+var moment = require("moment");
 var mysql = require("mysql2");
 
 const port = 5000;
@@ -30,6 +31,30 @@ app.get("/category", (req, res) => {
 app.post("/category", (req, res) => {
   const q = "INSERT INTO category (`name`,`budget`) VALUES (?)";
   const values = [req.body.name, req.body.budget];
+
+  db.query(q, [values], (err, data) => {
+    if (err) return res.status(500).json(err);
+    return res.status(200).json(data);
+  });
+});
+
+// expense related route here
+app.get("/expense", (req, res) => {
+  const q = "SELECT * FROM expense";
+  db.query(q, (err, result) => {
+    if (err) throw err;
+    res.status(200).json(result);
+  });
+});
+
+app.post("/expense", (req, res) => {
+  const q = "INSERT INTO expense (`date`,`description`,`location`,`payment`,`cateId`) VALUES (?)";
+  const values = [
+    moment(Date.now()).format("YYYY-MM-DD"),
+    req.body.description, 
+    req.body.location, 
+    req.body.payment, 
+    req.body.cateId];
 
   db.query(q, [values], (err, data) => {
     if (err) return res.status(500).json(err);
