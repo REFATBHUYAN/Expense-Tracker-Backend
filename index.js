@@ -26,7 +26,8 @@ const db = mysql.createConnection({
 console.log(moment(Date.now()).format("YYYY-MM-DD"));
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send(`Hello Welcome to Daily Expense Tracker Backend World! Here are some get Route that my you want to check 
+  | /category | /expense | /budget |`);
 });
 // category related route
 app.get("/category", (req, res) => {
@@ -91,6 +92,19 @@ app.post("/budget", (req, res) => {
   ];
 
   db.query(q, [values], (err, data) => {
+    if (err) return res.status(500).json(err);
+    return res.status(200).json(data);
+  });
+});
+
+app.post("/budget/:id", (req, res) => {
+  const id = req.params.id; 
+  const { totalBudget } = req.body;
+
+  const q = "UPDATE budget SET totalBudget = ? WHERE id = ?";
+  const values = [totalBudget, id];
+
+  db.query(q, values, (err, data) => {
     if (err) return res.status(500).json(err);
     return res.status(200).json(data);
   });
