@@ -1,2 +1,27 @@
 node_modules
 .env
+
+
+# [
+    {
+        "id": 1,
+        "name": "Housing",
+        "budget": 3500
+    },
+    {
+        "id": 2,
+        "name": "Transportation",
+        "budget": 1500
+    },
+    {
+        "id": 3,
+        "name": "Healthcare",
+        "budget": 1000
+    }
+
+# ]
+"description": "This mounth house rant",
+    "location": "Mirpur-10, Dhaka-1216",
+    "payment":"Visa Card",
+    "cateId": 1,
+    "amount": 1200

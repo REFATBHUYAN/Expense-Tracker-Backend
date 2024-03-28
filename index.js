@@ -11,11 +11,17 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "1234",
-  database: "test",
+  host: "sql5.freemysqlhosting.net",
+  user: "sql5694870",
+  password: "Fixe8XuvGD",
+  database: "sql5694870",
 });
+// const db = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "1234",
+//   database: "test",
+// });
 
 console.log(moment(Date.now()).format("YYYY-MM-DD"));
 
@@ -51,13 +57,14 @@ app.get("/expense", (req, res) => {
 
 app.post("/expense", (req, res) => {
   const q =
-    "INSERT INTO expense (`date`,`description`,`location`,`payment`,`cateId`) VALUES (?)";
+    "INSERT INTO expense (`date`,`description`,`location`,`payment`,`cateId`, `amount`) VALUES (?)";
   const values = [
     moment(Date.now()).format("YYYY-MM-DD"),
     req.body.description,
     req.body.location,
     req.body.payment,
     req.body.cateId,
+    req.body.amount,
   ];
 
   db.query(q, [values], (err, data) => {
