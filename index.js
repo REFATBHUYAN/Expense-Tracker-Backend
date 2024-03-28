@@ -17,6 +17,8 @@ const db = mysql.createConnection({
   database: "test",
 });
 
+console.log(moment(Date.now()).format("YYYY-MM-DD"));
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -48,13 +50,38 @@ app.get("/expense", (req, res) => {
 });
 
 app.post("/expense", (req, res) => {
-  const q = "INSERT INTO expense (`date`,`description`,`location`,`payment`,`cateId`) VALUES (?)";
+  const q =
+    "INSERT INTO expense (`date`,`description`,`location`,`payment`,`cateId`) VALUES (?)";
   const values = [
     moment(Date.now()).format("YYYY-MM-DD"),
-    req.body.description, 
-    req.body.location, 
-    req.body.payment, 
-    req.body.cateId];
+    req.body.description,
+    req.body.location,
+    req.body.payment,
+    req.body.cateId,
+  ];
+
+  db.query(q, [values], (err, data) => {
+    if (err) return res.status(500).json(err);
+    return res.status(200).json(data);
+  });
+});
+
+// total budget route
+
+app.get("/budget", (req, res) => {
+  const q = "SELECT * FROM budget";
+  db.query(q, (err, result) => {
+    if (err) throw err;
+    res.status(200).json(result);
+  });
+});
+app.post("/budget", (req, res) => {
+  const q = "INSERT INTO budget (`month`,`totalBudget`, `year`) VALUES (?)";
+  const values = [
+    moment(Date.now()).format("MM"),
+    req.body.totalBudget,
+    moment(Date.now()).format("YYYY"),
+  ];
 
   db.query(q, [values], (err, data) => {
     if (err) return res.status(500).json(err);
