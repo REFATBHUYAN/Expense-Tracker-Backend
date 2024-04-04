@@ -11,11 +11,17 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "sql5.freemysqlhosting.net",
-  user: "sql5696694",
-  password: "qYiJvRwCMX",
-  database: "sql5696694",
+  host: "bmapclztq4lzkxmmmoup-mysql.services.clever-cloud.com",
+  user: "ugjlxbdbbfrvrbpf",
+  password: "z12S0eym85FWKzdw7vM4",
+  database: "bmapclztq4lzkxmmmoup",
 });
+// const db = mysql.createConnection({
+//   host: "sql5.freemysqlhosting.net",
+//   user: "sql5696694",
+//   password: "qYiJvRwCMX",
+//   database: "sql5696694",
+// });
 // const db = mysql.createConnection({
 //   host: "sql5.freemysqlhosting.net",
 //   user: "sql5694870",
