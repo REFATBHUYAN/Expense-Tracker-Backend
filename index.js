@@ -12,10 +12,16 @@ app.use(express.json());
 
 const db = mysql.createConnection({
   host: "sql5.freemysqlhosting.net",
-  user: "sql5694870",
-  password: "Fixe8XuvGD",
-  database: "sql5694870",
+  user: "sql5696694",
+  password: "qYiJvRwCMX",
+  database: "sql5696694",
 });
+// const db = mysql.createConnection({
+//   host: "sql5.freemysqlhosting.net",
+//   user: "sql5694870",
+//   password: "Fixe8XuvGD",
+//   database: "sql5694870",
+// });
 // const db = mysql.createConnection({
 //   host: "localhost",
 //   user: "root",
